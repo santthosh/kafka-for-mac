@@ -67,7 +67,28 @@ Similarly inspect logs for schema-registry and kafka-rest
 
 ### Publishing and Subscribing using Kafka REST
 
-[confluentinc/kafka-rest](https://github.com/confluentinc/kafka-rest) has full documentation around this
+[confluentinc/kafka-rest](https://github.com/confluentinc/kafka-rest) has full documentation around this, but the validate.sh script allows you to run all the same quickly, go ahead and run it
+
+`./validate.sh`
+
+You should see the RESTful endpoints invoked in sequence for publishing and subscribing from your Kafka
+
+```
+# Get a list of topics
+["_schemas","jsontest"]
+# Produce a message with JSON data
+{"offsets":[{"partition":0,"offset":6,"error_code":null,"error":null}],"key_schema_id":null,"value_schema_id":null}
+# Get info about one topic
+{"name":"jsontest","configs":{"file.delete.delay.ms":"60000","segment.ms":"604800000","min.compaction.lag.ms":"0","retention.bytes":"-1","segment.index.bytes":"10485760","cleanup.policy":"delete","follower.replication.throttled.replicas":"","message.timestamp.difference.max.ms":"9223372036854775807","segment.jitter.ms":"0","preallocate":"false","segment.bytes":"1073741824","message.timestamp.type":"CreateTime","message.format.version":"0.11.0-IV2","max.message.bytes":"1000012","unclean.leader.election.enable":"false","retention.ms":"604800000","flush.ms":"9223372036854775807","delete.retention.ms":"86400000","leader.replication.throttled.replicas":"","min.insync.replicas":"1","flush.messages":"9223372036854775807","compression.type":"producer","min.cleanable.dirty.ratio":"0.5","index.interval.bytes":"4096"},"partitions":[{"partition":0,"leader":1,"replicas":[{"broker":1,"leader":true,"in_sync":true}]}]}
+# Create a consumer for JSON data, starting at the beginning of the topic's log. The consumer group is called "my_json_consumer" and the instance is "my_consumer_instance\  .
+{"instance_id":"my_consumer_instance","base_uri":"http://kr-host:8082/consumers/my_json_consumer/instances/my_consumer_instance"}
+# Subscribe the consumer to a topic
+No content in response
+# Then consume some data from a topic using the base URL in the first response.
+[]
+# Finally, close the consumer with a DELETE to make it leave the group and clean up its resources.
+No content in response
+```
 
 ### Tear down
 
