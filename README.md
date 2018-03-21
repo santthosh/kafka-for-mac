@@ -69,6 +69,7 @@ Similarly inspect logs for schema-registry and kafka-rest
 * Add a mapping with your machine ip to  `docker.for.mac.host.internal` to your `/etc/hosts` file
   * e.g. `10.0.4.162      docker.for.mac.host.internal`
   * find your machine ip with `ifconfig | grep -e "inet "`
+  * (!) your machine ip changes if you change network, update the config and restart the container
 * Connect to the kafka cluster via `localhost:29092` (bootstrap server)
 
 ### Publishing and Subscribing using Kafka REST
